@@ -16,8 +16,10 @@ import time
 from datetime import datetime
 import webbrowser
 import argparse
-
+from .service import download
+from .config import config
 app = Flask(__name__)
+
 
 @app.template_filter()
 def format_duration(duration): 
@@ -82,8 +84,10 @@ def stream_data(upload_id):
 
 @app.route('/open/<file_id>')
 def open_transcription(file_id):
-    open_file_directory(file_id)
-    return ""
+    if config.standalone:
+        open_file_directory(file_id)
+        return ""
+    return download(file_id)
     
 @app.route("/delete/<file_id>")
 def delete_archive_files(file_id):
@@ -105,6 +109,7 @@ def open_browser(website):
     return ""
 
 def run_app():
+    config.standalone = True
     app_height = int(min([monitor.height for monitor in get_monitors()])*0.8)
     app_width = int(min([monitor.width for monitor in get_monitors()])*0.8)
     try:

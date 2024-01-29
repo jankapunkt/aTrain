@@ -26,6 +26,7 @@ def get_model(model):
     models_config = load_model_config_file()
     model_info = models_config[model]
     model_path = str(files("aTrain.models").joinpath(model))
+    print('download model', model_path)
     if not os.path.exists(model_path):
         snapshot_download(repo_id=model_info["repo_id"], revision=model_info["revision"], local_dir=model_path, local_dir_use_symlinks=False)
     return model_path

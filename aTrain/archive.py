@@ -46,6 +46,7 @@ def create_metadata(file_id, filename, audio_duration, model, language, speaker_
         "compute_type" : compute_type,
         "timestamp": timestamp 
         }
+    print(metadata)
     with open(metadata_file_path,"w", encoding="utf-8") as metadata_file:
         yaml.dump(metadata, metadata_file)
 
