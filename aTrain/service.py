@@ -22,4 +22,4 @@ def download(file_name):
 #
 #   memory_file.seek(0)
 
-    return send_file(file_path, as_atachment=True)
+    return send_file(file_path, as_attachment=True)
