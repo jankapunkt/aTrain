@@ -10,13 +10,16 @@ from .archive import TRANSCRIPT_DIR
 
 
 def download(file_name):
-    print('download', file_name)
-    memory_file = BytesIO()
     file_path = os.path.join(TRANSCRIPT_DIR, file_name)
+    file_path = os.path.join(file_path, 'transcription_maxqda.txt')
+    print('download', file_path)
 
-    with zipfile.ZipFile(memory_file, 'w', zipfile.ZIP_DEFLATED) as zipf:
-        for root, dirs, files in os.walk(file_path):
-            for file in files:
-                zipf.write(os.path.join(root, file))
-    memory_file.seek(0)
-    return send_file(memory_file, as_atachment=True)
+#    memory_file = BytesIO()
+#    with zipfile.ZipFile(memory_file, 'w', zipfile.ZIP_DEFLATED) as zipf:
+#        for root, dirs, files in os.walk(file_path):
+#            for file in files:
+#                zipf.write(os.path.join(root, file))
+#
+#   memory_file.seek(0)
+
+    return send_file(file_path, as_atachment=True)
