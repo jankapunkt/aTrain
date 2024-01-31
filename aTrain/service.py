@@ -19,4 +19,4 @@ def download(file_name):
             for file in files:
                 zipf.write(os.path.join(root, file))
     memory_file.seek(0)
-    return send_file(memory_file, download_name=file_name)
+    return send_file(memory_file, as_atachment=True)
