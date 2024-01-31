@@ -1,7 +1,7 @@
 import zipfile
 import os
 from io import BytesIO
-from flask import send_file
+from flask import send_file, redirect
 from .archive import TRANSCRIPT_DIR
 
 
@@ -21,5 +21,7 @@ def download(file_name):
 #                zipf.write(os.path.join(root, file))
 #
 #   memory_file.seek(0)
-
-    return send_file(file_path, as_attachment=True)
+    try:
+        return send_file(file_path, as_attachment=True)
+    except:
+        return redirect('/404')
